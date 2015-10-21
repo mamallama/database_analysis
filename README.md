@@ -1,60 +1,20 @@
 # Database Optimizations
 
-## Description
+Original migration time: ```Completed running in 6044.447746 seconds.```
+After indices: ```AddIndices: migrated (0.0000s)``` (HOW?)
 
-Given an existing application which generates a report from a large data set, improve the efficiency of the report using database optimization methods.
+Timeline did not work at all for me. I had it open and running for about 30 minutes and it was still buffering at 8%. 
 
-## Objectives
-
-After completing this assignment, you should...
-
-* Understand the downsides of loops within loops in Rails.
-* Understand the benefits and appropriate use of indices on database tables.
-* Understand the downside of indices.
-* Be able to measure the runtime of various webapp functions.
-* Be able to query the database more efficiently.
-* Be able to implement database indices.
-
-## Deliverables
-
-* **An estimate.**  After you read through this assignment (but before you start coding), write down a number of hours that you expect each part to take (1-3).  Record your hours as you go.
-* **A repository.** You will be working from the existing application found in this repository, but you will make your own copy.
-* **A README.** The README should include data on all of the metrics requested below.
-* **A test suite.** Build your application using TDD.  Your test suite must include unit tests, controller tests, and at least two integration tests.
-* **A reflection on your estimate.**
-
-## Normal Mode
-
-#### Part One - Analysis
-
-For this project, you will be starting with an application which runs very slowly.  This inefficiency is due partly to the sheer amount of data present, but mostly due to the structure of the code and the database.  Your task is to make it run in a reasonable amount of time.
-
-Once you pull down the application from GitHub, run `bundle install` and `rake db:migrate`, then follow the steps below.
-
-1. Run `rake db:seed`.  When it is finished, it will tell you how long the process took (in seconds).  Record the amount of time.
-1. Turn on your server and open your browser to `localhost:3000`.  You will have to sort out which parameters you need to pass it.
-1. Open Chrome's timeline in developer tools, then hit Cmd-R on your keyboard.  The timeline will track time to load the page.  Record the following:
-  1. Total time in Chrome's timeline
-  1. "Idle" time in Chrome's timeline
-  1. The time given by Rails at the top of the page
-  1. The time given by Rails at the bottom of the page (sorry for the long scroll)
-  1. Explain what these four numbers are and which are subsets of the others
-1. Add appropriate indices to the data structure (via migrations).
-1. Record how long it takes to run the migrations that add indices.
-1. Reload the root page and record the four time numbers again.  Calculate your percent improvement in runtime.
-1. Examine the code that is run when the root path loads.  Modify the controller commands which access the database to make them more efficient.
-1. Calculate your percent improvement in runtime.
 1. Once you have optimized your code as much as you think you can, drop the database, run `rake db:migrate`, and then time how long it takes to run `rake db:seed`.  Was there an improvement or a worsening of runtime?  By what percent and why?
-1. Which is faster: (a) running `rake db:seed` without indices and then running a migration to add indices, or (b) adding indices during your initial `rake db:migrate`, then running `rake db:seed`?
+1. Which is faster: (a) running `rake db:seed` without indices and then running a migration to add indices, or (b) adding indices during your initial `rake db:migrate`, then running `rake db:seed`? b
 
-You've done a thorough job of analyzing runtime, but now take a look at storage space:
-
-* Record the size of your database (in bytes).
+* Size of your database: 563.5 MB
 * Record the size of your development log.
-* Give at least one method (feel free to Google) for reducing the size of one of these, yet keeping your data intact.
+* Give at least one method (feel free to Google) for reducing the size of one of these, yet keeping your data intact: number one answer on Stack Overflow was to delete the file. Rails apparently creates a new log file if one doesn't exist. Another popular answer: log rotation.
 * Do you think that this is smaller, about right, or larger than the size of databases you'll be working with in your career?
+I think this is probably larger, unless I somehow end up at... I don't know, amazon.
 
-Now let's talk about the "memory" numbers given on the page.  What impact have your changes had on memory usage?  If you reload a page again and again (with no code changes in between reloads), does memory used stay the same?  Have you ever been able to make memory used go down?
+Now let's talk about the "memory" numbers given on the page.  What impact have your changes had on memory usage?  If you reload a page again and again (with no code changes in between reloads), does memory used stay the same?  Have you ever been able to make memory used go down? Let's go over this?
 
 #### Part Two - Search Bar
 
